@@ -3,7 +3,7 @@ const router = express.Router();
 const Product = require("../Models/data")
 router.get("/get-product", async (req, res) => {
     const data = await Product.find();
-    res.json({ data });
+    res.json( data );
 });
 router.post("/post-product", async (req, res) => {
     let data = new Product(req.body);

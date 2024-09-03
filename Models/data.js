@@ -1,13 +1,9 @@
 const mongoose = require("mongoose");
 const dataSchema = new mongoose.Schema({
-  images: [
-    {
-        image: {
-            type: String,
-            required: true,
-          }
-    },
-  ],
+    image: [{
+        type: String,
+        required: true
+        }],
   productname: {
     type: String,
     required: true,
