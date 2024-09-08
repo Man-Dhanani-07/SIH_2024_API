@@ -85,7 +85,7 @@ router.put("/update-product/:_id", upload.any(), async (req, res) => {
     }
     
   };
-   if (req.files && req.files.length > 0) {
+if (req.files && req.files.length > 0) {
     updateData.image = req.files.map(file => file.path);
   }
   try {
