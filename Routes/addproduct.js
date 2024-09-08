@@ -26,6 +26,7 @@ router.get("/get-product", async (req, res) => {
 router.post("/post-product", upload.any(), async (req, res) => {
     const image = req.files ? req.files.map(file => file.path) : [];
     const newProduct = new Product({
+    product_id:req.body.product_id,
     productname: req.body.productname,
     category: req.body.category,
     subcategory: req.body.subcategory,

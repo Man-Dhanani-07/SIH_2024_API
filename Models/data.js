@@ -8,6 +8,10 @@ const mongoose = require("mongoose");
       type: String,
       required: true,
     },
+    product_id:{
+      type: String,
+      required: true,
+    },
     category: {
       type: String,
       required: true,
