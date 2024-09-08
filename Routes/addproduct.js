@@ -25,9 +25,17 @@ router.get("/get-product", async (req, res) => {
 });
 router.post("/post-product", async (req, res) => {
     // const image = req.files ? req.files.map(file => file.path) : [];
-    let data = new Product(req.body);
-    let result = await data.save();
-    res.send(result);
+    try {
+      let data = new Product(req.body);
+      let result = await data.save();
+      res.send(result);
+  } catch (error) {
+      console.error("Error saving the product:", error);
+      res.status(500).send({ message: "Failed to save the product", error });
+  }
+    // let data = new Product(req.body);
+    // let result = await data.save();
+    // res.send(result);
     // const newProduct = new Product({
     // product_id:req.body.product_id,
     // productname: req.body.productname,
