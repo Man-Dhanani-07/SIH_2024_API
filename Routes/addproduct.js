@@ -56,7 +56,7 @@ router.post("/post-product", upload.any(), async (req, res) => {
 });
 router.delete("/delete-product/:product_id", async (req, res) => {
   try {
-    let data = await Product.deleteOne({ _id: req.params._id });
+    let data = await Product.deleteOne({ product_id: req.params.product_id });
     res.json(data);
   } catch (err) {
     res.status(400).json({ error: err.message });
@@ -74,23 +74,22 @@ router.put("/update-product/:product_id", upload.any(), async (req, res) => {
     description: req.body.description,
     address: req.body.address,
     sellerdetails: {
-      seller_id: req.body.seller_id,
-      seller_name: req.body.seller_name,
-      seller_city: req.body.seller_city,
-      seller_contact_no: req.body.seller_contact_no,
-      seller_email: req.body.seller_email,
-      seller_language: req.body.seller_language,
-      seller_address: req.body.seller_address,
-      seller_occupation: req.body.seller_occupation
+      seller_id: req.body.sellerdetails.seller_id,
+      seller_name: req.body.sellerdetails.seller_name,
+      seller_city: req.body.sellerdetails.seller_city,
+      seller_contact_no: req.body.sellerdetails.seller_contact_no,
+      seller_email: req.body.sellerdetails.seller_email,
+      seller_language: req.body.sellerdetails.seller_language,
+      seller_address: req.body.sellerdetails.seller_address,
+      seller_occupation: req.body.sellerdetails.seller_occupation
     }
-    
   };
 if (req.files && req.files.length > 0) {
     updateData.image = req.files.map(file => file.path);
   }
   try {
     let data = await Product.updateOne(
-      { _id: req.params._id },
+      { product_id: req.params.product_id },
       { $set: updateData }
     );
     res.json(data);
