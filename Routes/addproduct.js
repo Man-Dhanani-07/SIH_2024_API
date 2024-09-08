@@ -34,7 +34,17 @@ router.post("/post-product", upload.any(), async (req, res) => {
     date: req.body.date,
     description: req.body.description,
     address: req.body.address,
-    image:image
+    image:image,
+    sellerdetails: {
+      seller_id: req.body.seller_id,
+      seller_name: req.body.seller_name,
+      seller_city: req.body.seller_city,
+      seller_contact_no: req.body.seller_contact_no,
+      seller_email: req.body.seller_email,
+      seller_language: req.body.seller_language,
+      seller_address: req.body.seller_address,
+      seller_occupation: req.body.seller_occupation
+    }
   });
   try {
     let result = await newProduct.save();
