@@ -67,7 +67,7 @@ const mongoose = require("mongoose");
       },   
       seller_occupation: {
         type: String,
-        reqired: true,
+        required: true,
       }
   }
   });
