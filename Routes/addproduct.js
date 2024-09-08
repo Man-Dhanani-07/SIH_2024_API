@@ -64,6 +64,7 @@ router.delete("/delete-product/:_id", async (req, res) => {
 });
 router.put("/update-product/:_id", upload.any(), async (req, res) => {
   const updateData = {
+    product_id:req.body.product_id,
     productname: req.body.productname,
     category: req.body.category,
     subcategory: req.body.subcategory,
@@ -72,6 +73,17 @@ router.put("/update-product/:_id", upload.any(), async (req, res) => {
     date: req.body.date,
     description: req.body.description,
     address: req.body.address,
+    sellerdetails: {
+      seller_id: req.body.seller_id,
+      seller_name: req.body.seller_name,
+      seller_city: req.body.seller_city,
+      seller_contact_no: req.body.seller_contact_no,
+      seller_email: req.body.seller_email,
+      seller_language: req.body.seller_language,
+      seller_address: req.body.seller_address,
+      seller_occupation: req.body.seller_occupation
+    }
+    
   };
    if (req.files && req.files.length > 0) {
     updateData.image = req.files.map(file => file.path);
