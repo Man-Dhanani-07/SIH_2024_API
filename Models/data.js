@@ -36,6 +36,40 @@ const mongoose = require("mongoose");
       type: String,
       required: true,
     },
+    sellerdetails:{
+      seller_id: {
+        type: String,
+        required: true,
+      },   
+      seller_name: {
+        type: String,
+        required: true,
+      },   
+      seller_city: {
+        type: String,
+        required: true,
+      },   
+      seller_contact_no: {
+        type: String,
+        required: true,
+      },   
+      seller_email: {
+        type: String,
+        required: false,
+      },   
+      seller_language: {
+        type: String,
+        required: true,
+      },   
+      seller_address: {
+        type: String,
+        required: true,
+      },   
+      seller_occupation: {
+        type: String,
+        reqired: true,
+      }
+  }
   });
 const dataModel = mongoose.model("data", dataSchema);
 module.exports = dataModel;
