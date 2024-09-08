@@ -104,6 +104,7 @@ router.put("/update-product/:product_id", async (req, res) => {
   console.error("Error updating product:", err);
   res.status(400).json({ error: err.message });
 }
+});
 // router.get("/by-category/:category", async (req, res) => {
 //   try {
 //     const category = req.params.category;
@@ -126,5 +127,16 @@ router.put("/update-product/:product_id", async (req, res) => {
   // } catch (err) {
   //   res.status(400).json({ error: err.message });
   // }
+router.get("/by-category/:category", async (req, res) => {
+  try {
+    const category = req.params.category;
+    const products = await Product.find({ category: category });
+    if (products.length === 0) {
+      return res.status(404).json({ message: "No products found in this category" });
+    }
+    res.json(products);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
 });
 module.exports = router;
