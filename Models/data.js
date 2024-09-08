@@ -42,6 +42,10 @@ const dataSchema = new mongoose.Schema({
     required: true,
   },
   sellerdetails: {
+    seller_image: {
+      type: String,
+      required: true
+    },
     seller_id: {
       type: String,
       required: true,

@@ -91,6 +91,7 @@ router.put("/update-product/:product_id", async (req, res) => {
     description: req.body.description || existingProduct.description,
     address: req.body.address || existingProduct.address,
     sellerdetails: req.body.sellerdetails ? {
+      seller_image:req.body.seller_image||existingProduct.sellerdetails.seller_image,
       seller_id: req.body.sellerdetails.seller_id || existingProduct.sellerdetails.seller_id,
       seller_name: req.body.sellerdetails.seller_name || existingProduct.sellerdetails.seller_name,
       seller_city: req.body.sellerdetails.seller_city || existingProduct.sellerdetails.seller_city,
