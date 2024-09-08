@@ -54,7 +54,7 @@ router.post("/post-product", upload.any(), async (req, res) => {
     res.status(400).json({ error: err.message });
   }
 });
-router.delete("/delete-product/:_id", async (req, res) => {
+router.delete("/delete-product/:product_id", async (req, res) => {
   try {
     let data = await Product.deleteOne({ _id: req.params._id });
     res.json(data);
@@ -62,7 +62,7 @@ router.delete("/delete-product/:_id", async (req, res) => {
     res.status(400).json({ error: err.message });
   }
 });
-router.put("/update-product/:_id", upload.any(), async (req, res) => {
+router.put("/update-product/:product_id", upload.any(), async (req, res) => {
   const updateData = {
     product_id:req.body.product_id,
     productname: req.body.productname,
