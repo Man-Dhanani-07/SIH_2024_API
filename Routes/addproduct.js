@@ -12,6 +12,19 @@ router.get("/get-product", async (req, res) => {
     res.status(400).json({ error: err.message });
   }
 });
+router.get("/get-seller-product/:seller_id", async (req, res) => {
+  try {
+    const { seller_id } = req.params;
+    const products = await Product.find({ "sellerdetails.seller_id": seller_id });
+    if (products.length === 0) {
+      return res.status(404).json({ message: "No products found for the provided seller_id" });
+    }
+    res.json(products);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
+
 router.post("/post-product", async (req, res) => {
     try {
       let data = new Product(req.body);
@@ -93,7 +106,7 @@ router.get("/by-category/:subcategory", async (req, res) => {
     res.status(400).json({ error: err.message });
   }
 });
-router.delete("/delete-seller-products/:seller_id", async (req, res) => {
+router.delete("/delete-seller-product/:seller_id", async (req, res) => {
   try {
     const { seller_id } = req.params;
     const data = await Product.deleteMany({ "sellerdetails.seller_id": seller_id });
