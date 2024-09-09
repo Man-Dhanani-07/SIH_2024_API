@@ -72,7 +72,7 @@ router.put("/update-product/:product_id", async (req, res) => {
   res.status(400).json({ error: err.message });
 }
 });
-router.get("/by-category/:category", async (req, res) => {
+router.get("/by-category/:subcategory", async (req, res) => {
   try {
     const category = req.params.category;
     const products = await Product.find({ category: category });
