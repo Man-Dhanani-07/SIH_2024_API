@@ -74,8 +74,8 @@ router.put("/update-product/:product_id", async (req, res) => {
 });
 router.get("/by-category/:subcategory", async (req, res) => {
   try {
-    const category = req.params.category;
-    const products = await Product.find({ category: category });
+    const subcategory = req.params.subcategory;
+    const products = await Product.find({ subcategory: subcategory });
     if (products.length === 0) {
       return res.status(404).json({ message: "No products found in this category" });
     }
