@@ -13,7 +13,6 @@ router.get("/get-product", async (req, res) => {
   }
 });
 router.post("/post-product", async (req, res) => {
-    // const image = req.files ? req.files.map(file => file.path) : [];
     try {
       let data = new Product(req.body);
       let result = await data.save();
@@ -23,13 +22,23 @@ router.post("/post-product", async (req, res) => {
       res.status(500).send({ message: "Failed to save the product", error });
   }
 });
-router.delete("/delete-product/:product_id", async (req, res) => {
+router.delete("/delete-product/:seller_id/:product_id", async (req, res) => {
   try {
-    let data = await Product.deleteOne({ product_id: req.params.product_id });
-    res.json(data);
+    const { seller_id, product_id } = req.params;
+    const data = await Product.deleteOne({ 
+      "sellerdetails.seller_id": seller_id, 
+      product_id: product_id 
+    });
+
+    if (data.deletedCount === 0) {
+      return res.status(404).json({ message: "No product found with the provided seller_id and product_id" });
+    }
+
+    res.json({ message: "Product deleted successfully" });
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
+
 });
 router.put("/update-product/:product_id", async (req, res) => {
   try {
@@ -84,4 +93,18 @@ router.get("/by-category/:subcategory", async (req, res) => {
     res.status(400).json({ error: err.message });
   }
 });
+router.delete("/delete-seller-products/:seller_id", async (req, res) => {
+  try {
+    const { seller_id } = req.params;
+    const data = await Product.deleteMany({ "sellerdetails.seller_id": seller_id });
+
+    if (data.deletedCount === 0) {
+      return res.status(404).json({ message: "No products found for the provided seller_id" });
+    }
+    res.json({ message: "All products for the seller deleted successfully", deletedCount: data.deletedCount });
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
+
 module.exports = router;
